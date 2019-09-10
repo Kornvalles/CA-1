@@ -1,7 +1,10 @@
 package facades;
 
+import dto.StudentDTO;
 import utils.EMF_Creator;
 import entities.Student;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -16,12 +19,14 @@ import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
 //@Disabled
-public class FacadeExampleTest {
+public class StudentfacadeTest {
 
     private static EntityManagerFactory emf;
     private static Studentfacade facade;
+    private static Student student;
+    private static List<Student> students = new ArrayList<>();
 
-    public FacadeExampleTest() {
+    public StudentfacadeTest() {
     }
 
     //@BeforeAll
@@ -32,7 +37,7 @@ public class FacadeExampleTest {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = Studentfacade.getFacadeExample(emf);
+        facade = Studentfacade.getStudentFacade(emf);
     }
 
     /*   **** HINT **** 
@@ -44,7 +49,7 @@ public class FacadeExampleTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = Studentfacade.getFacadeExample(emf);
+       facade = Studentfacade.getStudentFacade(emf);
     }
 
     @AfterAll
@@ -56,13 +61,14 @@ public class FacadeExampleTest {
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
+        facade = Studentfacade.getStudentFacade(emf);
+        student = new Student("Mads", "cph-mj12", "grøn");
+        students.add(student);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
             em.createNamedQuery("student.deleteAllRows").executeUpdate();
-            em.persist(new Student("aaa", "bbb", "ccc"));
-            em.persist(new Student("aaaa", "bbbb", "cccc"));
-
+            em.persist(student);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -77,7 +83,58 @@ public class FacadeExampleTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+        assertEquals(1, facade.getRenameMeCount(), "Expects two rows in the database");
+    }
+    
+        @Test
+    public void testGetAllStudents() {
+        //Arrange
+        List<StudentDTO> expResult = new ArrayList<>();
+        expResult.add(new StudentDTO(student));
+        //Act
+        List<StudentDTO> result = facade.getAllStudents();
+        //Assert
+        assertEquals(expResult, result);
     }
 
+    @Test
+    public void testGetStudentByID() throws Exception {
+        //Arrange 
+        StudentDTO expResult = new StudentDTO(student);
+        //Act
+        StudentDTO result = facade.getStudentDTOById(1);
+        //Assert
+        assertEquals(expResult, result);
+    }
+
+     @Test
+    public void testGetStudentByName() throws Exception {
+        //Arrange 
+        StudentDTO expResult = new StudentDTO(student);
+        //Act
+        StudentDTO result = facade.getStudentDTOByName("Mads");
+        //Assert
+        assertEquals(expResult, result);
+    }
+    
+     @Test
+    public void testAddStudent() {
+        //Arrange
+        Student newStudent = new Student("Thies", "cph-TD43", "rød");
+        //Act
+        Student result = facade.addStudent(newStudent);
+        //Assert
+        assertEquals(newStudent, result);
+        // Removing the user again so it doesn't mess up the other tests.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.remove(em.find(Student.class, new Long(students.size() + 1)));
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 }
+
