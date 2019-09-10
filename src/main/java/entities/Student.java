@@ -24,8 +24,7 @@ public class Student implements Serializable {
     public Student() {
     }
 
-    public Student(Long id, String name, String students_credential, String color) {
-        this.id = id;
+    public Student(String name, String students_credential, String color) {
         this.name = name;
         this.students_credential = students_credential;
         this.color = color;
@@ -33,10 +32,6 @@ public class Student implements Serializable {
     
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
