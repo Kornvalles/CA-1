@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -17,7 +18,11 @@ import javax.persistence.NamedQuery;
  * @author benjaminbajrami
  */
 @Entity
-@NamedQuery(name = "Joke.deleteAllRows", query = "DELETE from Joke")
+@NamedQueries({
+@NamedQuery(name = "Joke.deleteAllRows", query = "DELETE from Joke"),
+@NamedQuery(name = "Joke.findAll", query = "SELECT j FROM Joke j"),
+@NamedQuery(name = "Joke.getByName", query = "SELECT j FROM Joke j WHERE j.name LIKE :name")
+})
 public class Joke implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +32,9 @@ public class Joke implements Serializable {
     private String joke;
     private String reference;
     private double rating;
+
+    public Joke() {
+    }
 
     public Joke(String joke, String reference, double rating) {
         this.joke = joke;

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 /**
@@ -17,7 +18,11 @@ import javax.persistence.NamedQuery;
  * @author benjaminbajrami
  */
 @Entity
-@NamedQuery(name = "Car.deleteAllRows", query = "DELETE from Car")
+@NamedQueries({
+@NamedQuery(name = "Car.deleteAllRows", query = "DELETE from Car"),
+@NamedQuery(name = "Car.findAll", query = "SELECT c FROM Car c"),
+@NamedQuery(name = "Car.getByName", query = "SELECT c FROM Car c WHERE c.name LIKE :name")
+})
 public class Car implements Serializable {
 
     private static final long serialVersionUID = 1L;
