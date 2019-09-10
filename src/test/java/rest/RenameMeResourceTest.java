@@ -71,8 +71,8 @@ public class RenameMeResourceTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-            em.persist(new Student("Some txt","More text"));
-            em.persist(new Student("aaa","bbb"));
+//            em.persist(new Student("Some txt","More text"));
+//            em.persist(new Student("aaa","bbb"));
            
             em.getTransaction().commit();
         } finally {
