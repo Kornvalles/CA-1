@@ -24,13 +24,12 @@ public class Student implements Serializable {
     public Student() {
     }
 
-    public Student(Long id, String name, Long students_credential, String color) {
+    public Student(Long id, String name, String students_credential, String color) {
         this.id = id;
         this.name = name;
         this.students_credential = students_credential;
         this.color = color;
     }
-    
     
     public Long getId() {
         return id;
