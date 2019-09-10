@@ -83,7 +83,7 @@ public class StudentfacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(1, facade.getRenameMeCount(), "Expects two rows in the database");
+        assertEquals(1, facade.getStudentCount(), "Expects two rows in the database");
     }
     
         @Test
@@ -92,7 +92,7 @@ public class StudentfacadeTest {
         List<StudentDTO> expResult = new ArrayList<>();
         expResult.add(new StudentDTO(student));
         //Act
-        List<StudentDTO> result = facade.getAllStudents();
+        List<Student> result = facade.getAllStudents();
         //Assert
         assertEquals(expResult, result);
     }
@@ -102,7 +102,7 @@ public class StudentfacadeTest {
         //Arrange 
         StudentDTO expResult = new StudentDTO(student);
         //Act
-        StudentDTO result = facade.getStudentDTOById(1);
+        Student result = facade.getStudentById(1);
         //Assert
         assertEquals(expResult, result);
     }
@@ -112,7 +112,7 @@ public class StudentfacadeTest {
         //Arrange 
         StudentDTO expResult = new StudentDTO(student);
         //Act
-        StudentDTO result = facade.getStudentDTOByName("Mads");
+        Student result = facade.getStudentByName("Mads");
         //Assert
         assertEquals(expResult, result);
     }

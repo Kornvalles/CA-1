@@ -38,30 +38,30 @@ public class Studentfacade {
     }
     
     //TODO Remove/Change this before use
-    public long getRenameMeCount(){
+    public long getStudentCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM RenameMe r").getSingleResult();
-            return renameMeCount;
+            long studentCount = (long)em.createQuery("SELECT COUNT(r) FROM Student r").getSingleResult();
+            return studentCount;
         }finally{  
             em.close();
         }
         
     }
 
-    List<StudentDTO> getAllStudents() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    StudentDTO getStudentDTOById(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    StudentDTO getStudentDTOByName(String mads) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     Student addStudent(Student newStudent) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    List<Student> getAllStudents() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Student getStudentById(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    Student getStudentByName(String mads) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

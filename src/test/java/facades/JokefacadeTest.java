@@ -77,7 +77,7 @@ public class JokefacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getRenameMeCount(), "Expects two rows in the database");
+        assertEquals(2, facade.getStudentCount(), "Expects two rows in the database");
     }
 
 }
