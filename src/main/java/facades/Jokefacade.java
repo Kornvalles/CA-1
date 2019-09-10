@@ -10,13 +10,13 @@ import javax.persistence.Persistence;
  *
  * Rename Class to a relevant name Add add relevant facade methods
  */
-public class Jokefacede {
+public class Jokefacade {
 
-    private static Jokefacede instance;
+    private static Jokefacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private Jokefacede() {}
+    private Jokefacade() {}
     
     
     /**
@@ -24,10 +24,10 @@ public class Jokefacede {
      * @param _emf
      * @return an instance of this facade class.
      */
-    public static Jokefacede getFacadeExample(EntityManagerFactory _emf) {
+    public static Jokefacade getFacadeExample(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new Jokefacede();
+            instance = new Jokefacade();
         }
         return instance;
     }
