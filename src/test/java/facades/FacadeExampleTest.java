@@ -19,7 +19,7 @@ import utils.EMF_Creator.Strategy;
 public class FacadeExampleTest {
 
     private static EntityManagerFactory emf;
-    private static FacadeExample facade;
+    private static Studentfacade facade;
 
     public FacadeExampleTest() {
     }
@@ -32,7 +32,7 @@ public class FacadeExampleTest {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = FacadeExample.getFacadeExample(emf);
+        facade = Studentfacade.getFacadeExample(emf);
     }
 
     /*   **** HINT **** 
@@ -44,7 +44,7 @@ public class FacadeExampleTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = FacadeExample.getFacadeExample(emf);
+       facade = Studentfacade.getFacadeExample(emf);
     }
 
     @AfterAll
@@ -59,9 +59,9 @@ public class FacadeExampleTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("RenameMe.deleteAllRows").executeUpdate();
-//            em.persist(new Student("Some txt", "More text"));
-//            em.persist(new Student("aaa", "bbb"));
+            em.createNamedQuery("student.deleteAllRows").executeUpdate();
+            em.persist(new Student("aaa", "bbb", "ccc"));
+            em.persist(new Student("aaaa", "bbbb", "cccc"));
 
             em.getTransaction().commit();
         } finally {
