@@ -29,6 +29,9 @@ public class Car implements Serializable {
     private String model;
     private int price;
 
+    public Car() {
+    }
+
     public Car(int year, String make, String model, int price) {
         this.year = year;
         this.make = make;
