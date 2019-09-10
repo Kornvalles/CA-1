@@ -21,7 +21,7 @@ public class Studentresource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode",
+                "jdbc:mysql://localhost:3307/CA",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);

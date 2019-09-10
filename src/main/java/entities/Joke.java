@@ -10,19 +10,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author benjaminbajrami
  */
 @Entity
+@NamedQuery(name = "Joke.deleteAllRows", query = "DELETE from Joke")
 public class Joke implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String joke;
+    private String reference;
+    private double rating;
 
+    public Joke(String joke, String reference, double rating) {
+        this.joke = joke;
+        this.reference = reference;
+        this.rating = rating;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -31,6 +42,30 @@ public class Joke implements Serializable {
         this.id = id;
     }
 
+    public String getJoke() {
+        return joke;
+    }
+
+    public void setJoke(String joke) {
+        this.joke = joke;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

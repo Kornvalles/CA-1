@@ -33,7 +33,7 @@ public class StudentfacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode_test",
+                "jdbc:mysql://localhost:3307/CA1_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
@@ -67,7 +67,7 @@ public class StudentfacadeTest {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("student.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Student.deleteAllRows").executeUpdate();
             em.persist(student);
             em.getTransaction().commit();
         } finally {
