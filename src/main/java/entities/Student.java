@@ -18,7 +18,7 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Long students_credential;
+    private String students_credential;
     private String color;
     
     public Student() {
@@ -48,11 +48,11 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public Long getStudents_credential() {
+    public String getStudents_credential() {
         return students_credential;
     }
 
-    public void setStudents_credential(Long students_credential) {
+    public void setStudents_credential(String students_credential) {
         this.students_credential = students_credential;
     }
 
