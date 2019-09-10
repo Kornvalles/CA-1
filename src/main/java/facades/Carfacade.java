@@ -40,8 +40,8 @@ public class Carfacade {
     public long getCarCount(){
         EntityManager em = emf.createEntityManager();
         try{
-            long renameMeCount = (long)em.createQuery("SELECT COUNT(r) FROM Car r").getSingleResult();
-            return renameMeCount;
+            long carCount = (long)em.createQuery("SELECT COUNT(r) FROM Car r").getSingleResult();
+            return carCount;
         }finally{  
             em.close();
         }
