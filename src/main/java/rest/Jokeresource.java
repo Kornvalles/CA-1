@@ -20,28 +20,43 @@ import javax.ws.rs.core.MediaType;
 public class Jokeresource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/CA1",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-    private static final Jokefacade FACADE =  Jokefacade.getJokeFacade(EMF);
+            "pu",
+            "jdbc:mysql://localhost:3307/CA1",
+            "dev",
+            "ax2",
+            EMF_Creator.Strategy.CREATE);
+    private static final Jokefacade FACADE = Jokefacade.getJokeFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-            
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
+
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getJokeCount() {
         long count = FACADE.getJokeCount();
         //System.out.println("--------------->"+count);
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+        return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
-    
+
+    @Path("random")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getRandom() {
+        return GSON.toJson(FACADE.getRandomJoke());
+    }
+
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAll() {
+        return GSON.toJson(FACADE.getAllJokes());
+    }
+
     @Path("populate")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -50,5 +65,4 @@ public class Jokeresource {
         return "{\"msg\":\"done!\"}";
     }
 
- 
 }

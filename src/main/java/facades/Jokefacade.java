@@ -80,7 +80,7 @@ public class Jokefacade {
         }
     }
 
-    List<JokeDTO> getAllJokes() {
+    public List<JokeDTO> getAllJokes() {
         EntityManager em = getEntityManager();
         try {
             List<Joke> jokes = em.createNamedQuery("Joke.findAll").getResultList();
@@ -99,11 +99,12 @@ public class Jokefacade {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
-            em.persist(new Joke("Hvorfor var blondinen glad for, at samle et puzzlespil på 6 måneder?", "fordi der stod 2-4 år", 0));
-            em.persist(new Joke("En røver kommer ind i butikken og stjæler et TV. blondinen løber efter ham og råber, “Vent, du har glemt fjernbetjeningen!", "Blondiner er generelt dumme.", 0));
-            em.persist(new Joke("Alle børnene kom sikkert over havet undtagen Jannik han tog titanic", "Titanic var det verdenskendte skib der sank på sin jomfrurejse", 0));
-            em.persist(new Joke("Hvorfor er zoologisk have aldrig blevet solgt? - Den er for dyr.", "Ordet dyrs homonym", 0));
-            em.persist(new Joke("Jeg overvejer at gifte mig med en tysker er det over grænsen?", "Tyskland grænser op til Danmark som der formodes, der bliver talt om.", 0));
+            em.persist(new Joke("Hvorfor var blondinen glad for, at samle et puzzlespil på 6 måneder?", "fordi der stod 2-4 år", 3));
+            em.persist(new Joke("En røver kommer ind i butikken og stjæler et TV. blondinen løber efter ham og råber, “Vent, du har glemt fjernbetjeningen!", "Blondiner er generelt dumme.", 10));
+            em.persist(new Joke("Alle børnene kom sikkert over havet undtagen Jannik han tog titanic", "Titanic var det verdenskendte skib der sank på sin jomfrurejse", 2));
+            em.persist(new Joke("Hvorfor er zoologisk have aldrig blevet solgt? - Den er for dyr.", "Ordet dyrs homonym", 6));
+            em.persist(new Joke("Jeg overvejer at gifte mig med en tysker er det over grænsen?", "Tyskland grænser op til Danmark som der formodes, der bliver talt om.", 8));
+            em.getTransaction().commit();
         } finally {
             em.close();
         }
