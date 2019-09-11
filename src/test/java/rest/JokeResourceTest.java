@@ -23,7 +23,7 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-//@Disabled
+@Disabled
 public class JokeResourceTest {
 
     private static final int SERVER_PORT = 7777;
@@ -83,7 +83,7 @@ public class JokeResourceTest {
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
-        given().when().get("/xxx").then().statusCode(200);
+        given().when().get("/joke").then().statusCode(200);
     }
    
     //This test assumes the database contains two rows
@@ -91,7 +91,7 @@ public class JokeResourceTest {
     public void testDummyMsg() throws Exception {
         given()
         .contentType("application/json")
-        .get("/xxx/").then()
+        .get("/joke/").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("msg", equalTo("Hello World"));   
@@ -101,7 +101,7 @@ public class JokeResourceTest {
     public void testCount() throws Exception {
         given()
         .contentType("application/json")
-        .get("/xxx/count").then()
+        .get("/joke/count").then()
         .assertThat()
         .statusCode(HttpStatus.OK_200.getStatusCode())
         .body("count", equalTo(2));   

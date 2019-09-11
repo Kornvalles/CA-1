@@ -13,8 +13,8 @@ import javax.persistence.NamedQuery;
 @Entity
 @NamedQueries({
 @NamedQuery(name = "Student.deleteAllRows", query = "DELETE from Student"),
-@NamedQuery(name = "Student.findAll", query = "SELECT s FROM Movie s"),
-@NamedQuery(name = "Student.getByName", query = "SELECT s FROM Movie s WHERE s.name LIKE :name")
+@NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
+@NamedQuery(name = "Student.getByName", query = "SELECT s FROM Student s WHERE s.name LIKE :name")
 })
 public class Student implements Serializable {
 

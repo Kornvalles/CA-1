@@ -13,13 +13,14 @@ import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import utils.Settings;
 import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-//@Disabled
+@Disabled
 public class JokefacadeTest {
 
     private static EntityManagerFactory emf;
@@ -47,11 +48,11 @@ public class JokefacadeTest {
         The file config.properties and the corresponding helper class utils.Settings is added just to do that. 
         See below for how to use these files. This is our RECOMENDED strategy
      */
-    @BeforeAll
-    public static void setUpClassV2() {
-       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = Jokefacade.getJokeFacade(emf);
-    }
+//    @BeforeAll
+//    public static void setUpClassV2() {
+//       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
+//       facade = Jokefacade.getJokeFacade(emf);
+//    }
 
     @AfterAll
     public static void tearDownClass() {
