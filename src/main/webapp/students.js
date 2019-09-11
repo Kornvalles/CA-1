@@ -4,7 +4,7 @@ function getStudents() {
   .then(data => {
    
     let rows = data.map(function(name) {
-        let row="<tr> <td>"+name.name+"</td> <td>"+name.students_credential+
+        let row="<tr> <td>"+name.students_credential+"</td> <td>"+name.name+
                 "</td> <td>"+name.color+"</td> </tr>";
         return row;
     })
