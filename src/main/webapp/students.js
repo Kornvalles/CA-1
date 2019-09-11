@@ -6,7 +6,7 @@ function getStudents(url) {
   .then(data => {
    
     let rows = data.map(function(name) {
-        let row="<tr> <td>"+name.name+"</td> <td>"+name.studentid+
+        let row="<tr> <td>"+name.name+"</td> <td>"+name.students_credential+
                 "</td> <td>"+name.color+"</td> </tr>";
         return row;
     })
