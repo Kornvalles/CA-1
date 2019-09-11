@@ -94,5 +94,20 @@ public class Studentfacade {
             em.close();
         }
     }
+    
+        public void populateStudents() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Student.deleteAllRows").executeUpdate();
+            em.persist(new Student("Benjamin", "cph-bb159", "Yellow"));
+            em.persist(new Student("Iben", "cph-ia62", "Yellow"));
+            em.persist(new Student("Mikkel", "cph-mc335", "Yellow"));
+            em.persist(new Student("Nicklas", "cph-nd76", "Yellow"));
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 
 }

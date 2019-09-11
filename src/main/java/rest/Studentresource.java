@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import entities.Student;
 import utils.EMF_Creator;
 import facades.Studentfacade;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -47,6 +49,14 @@ public class Studentresource {
     @Produces({MediaType.APPLICATION_JSON})
     public String getAll() {
         return GSON.toJson(FACADE.getAllStudents());
+    }
+    
+    @Path("populate")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String populate() {
+        FACADE.populateStudents();
+        return "{\"msg\":\"done!\"}";
     }
     
 }

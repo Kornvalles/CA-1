@@ -1,4 +1,4 @@
-var url = "/student/all";
+let url = "https://kodebanditterne.dk/ca1/api/student/all";
 
 function getStudents(url) {
     fetch(url)
