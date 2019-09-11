@@ -2,23 +2,20 @@ package facades;
 
 import dto.StudentDTO;
 import entities.Student;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-/**
- *
- * Rename Class to a relevant name Add add relevant facade methods
- */
 public class Studentfacade {
 
     private static Studentfacade instance;
     private static EntityManagerFactory emf;
     
     //Private Constructor to ensure Singleton
-    private Studentfacade() {}
-    
+    private Studentfacade() {
+    }
     
     /**
      * 
@@ -50,19 +47,52 @@ public class Studentfacade {
     }
 
     Student addStudent(Student newStudent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(newStudent);
+            em.getTransaction().commit();
+            return newStudent;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+        return null;
     }
 
-    List<Student> getAllStudents() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    List<StudentDTO> getAllStudents() {
+                EntityManager em = getEntityManager();
+        try {
+            List<Student> students = em.createNamedQuery("Student.findAll").getResultList();
+            List<StudentDTO> result = new ArrayList<>();
+            for(Student student: students){
+                result.add(new StudentDTO(student));
+            }
+            return result;
+        } finally {
+            em.close();
+        }
     }
 
-    Student getStudentById(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    StudentDTO getStudentById(long id) {
+                EntityManager em = emf.createEntityManager();
+        try {
+            Student student = em.find(Student.class, id);
+            return new StudentDTO(student); 
+        } finally {
+            em.close();
+        }
     }
 
-    Student getStudentByName(String mads) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    StudentDTO getStudentByName(String name) {
+                EntityManager em = getEntityManager();
+        try {
+            return em.createQuery("SELECT new dto.StudentDTO(s) FROM Student s WHERE s.name = :name", StudentDTO.class)
+                    .setParameter("name", name).getSingleResult();
+        } finally {
+            em.close();
+        }
     }
 
 }

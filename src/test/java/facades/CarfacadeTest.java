@@ -1,7 +1,10 @@
 package facades;
 
+import dto.CarDTO;
 import utils.EMF_Creator;
-import entities.Student;
+import entities.Car;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -19,7 +22,9 @@ import utils.EMF_Creator.Strategy;
 public class CarfacadeTest {
 
     private static EntityManagerFactory emf;
-    private static Studentfacade facade;
+    private static Carfacade facade;
+    private static Car car;
+    private static List<Car> cars = new ArrayList<>();
 
     public CarfacadeTest() {
     }
@@ -28,11 +33,11 @@ public class CarfacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode_test",
+                "jdbc:mysql://localhost:3307/CA1_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = Studentfacade.getStudentFacade(emf);
+        facade = Carfacade.getCarFacade(emf);
     }
 
     /*   **** HINT **** 
@@ -44,7 +49,7 @@ public class CarfacadeTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = Studentfacade.getStudentFacade(emf);
+       facade = Carfacade.getCarFacade(emf);
     }
 
     @AfterAll
@@ -56,13 +61,14 @@ public class CarfacadeTest {
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
+        facade = Carfacade.getCarFacade(emf);
+        car = new Car(1998, "Toyota", "Corolla", 6000);
+        cars.add(car);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("student.deleteAllRows").executeUpdate();
-            em.persist(new Student("aaa", "bbb", "ccc"));
-            em.persist(new Student("aaaa", "bbbb", "cccc"));
-
+            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            em.persist(car);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -77,7 +83,58 @@ public class CarfacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getStudentCount(), "Expects two rows in the database");
+        assertEquals(2, facade.getCarCount(), "Expects two rows in the database");
+    }
+    
+            @Test
+    public void testGetAllStudents() {
+        //Arrange
+        List<CarDTO> expResult = new ArrayList<>();
+        expResult.add(new CarDTO(car));
+        //Act
+        List<Car> result = facade.getAllCars();
+        //Assert
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetStudentByID() throws Exception {
+        //Arrange 
+        CarDTO expResult = new CarDTO(car);
+        //Act
+        Car result = facade.getCarById(1);
+        //Assert
+        assertEquals(expResult, result);
+    }
+
+     @Test
+    public void testGetCarByMake() throws Exception {
+        //Arrange 
+        CarDTO expResult = new CarDTO(car);
+        //Act
+        Car result = facade.getCarByMake("Toyota");
+        //Assert
+        assertEquals(expResult, result);
+    }
+    
+     @Test
+    public void testMakeCar() {
+        //Arrange
+        Car newCar = new Car(2018, "Tesla", "Model 3", 399999);
+        //Act
+        Car result = facade.MakeCar(newCar);
+        //Assert
+        assertEquals(newCar, result);
+        // Removing the user again so it doesn't mess up the other tests.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.remove(em.find(Car.class, new Long(cars.size() + 1)));
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
 }

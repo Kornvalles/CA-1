@@ -1,7 +1,11 @@
 package facades;
 
+import dto.JokeDTO;
+import entities.Joke;
 import utils.EMF_Creator;
 import entities.Student;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.AfterAll;
@@ -19,7 +23,9 @@ import utils.EMF_Creator.Strategy;
 public class JokefacadeTest {
 
     private static EntityManagerFactory emf;
-    private static Studentfacade facade;
+    private static Jokefacade facade;
+    private static Joke joke;
+    private static List<Joke> jokes = new ArrayList<>();
 
     public JokefacadeTest() {
     }
@@ -28,11 +34,11 @@ public class JokefacadeTest {
     public static void setUpClass() {
         emf = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/startcode_test",
+                "jdbc:mysql://localhost:3307/CA1_test",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-        facade = Studentfacade.getStudentFacade(emf);
+        facade = Jokefacade.getJokeFacade(emf);
     }
 
     /*   **** HINT **** 
@@ -44,7 +50,7 @@ public class JokefacadeTest {
     @BeforeAll
     public static void setUpClassV2() {
        emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-       facade = Studentfacade.getStudentFacade(emf);
+       facade = Jokefacade.getJokeFacade(emf);
     }
 
     @AfterAll
@@ -56,13 +62,14 @@ public class JokefacadeTest {
     //TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
+        facade = Jokefacade.getJokeFacade(emf);
+        joke = new Joke("joke, HAHA","Hr. HA", 10.0);
+        jokes.add(joke);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("student.deleteAllRows").executeUpdate();
-            em.persist(new Student("aaa", "bbb", "ccc"));
-            em.persist(new Student("aaaa", "bbbb", "cccc"));
-
+            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+            em.persist(joke);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -77,7 +84,58 @@ public class JokefacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getStudentCount(), "Expects two rows in the database");
+        assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
+    }
+    
+            @Test
+    public void testGetAllStudents() {
+        //Arrange
+        List<JokeDTO> expResult = new ArrayList<>();
+        expResult.add(new JokeDTO(joke));
+        //Act
+        List<Joke> result = facade.getAllJokes();
+        //Assert
+        assertEquals(expResult, result);
+    }
+
+    @Test
+    public void testGetStudentByID() throws Exception {
+        //Arrange 
+        JokeDTO expResult = new JokeDTO(joke);
+        //Act
+        Joke result = facade.getJokeById(1);
+        //Assert
+        assertEquals(expResult, result);
+    }
+
+     @Test
+    public void testGetJokeByRating() throws Exception {
+        //Arrange 
+        JokeDTO expResult = new JokeDTO(joke);
+        //Act
+        Student result = facade.getJokeByRating(10.0);
+        //Assert
+        assertEquals(expResult, result);
+    }
+    
+     @Test
+    public void testAddJoke() {
+        //Arrange
+        Joke newJoke = new Joke("jokes, meh", "benny", 2.4);
+        //Act
+        Joke result = facade.addJoke(newJoke);
+        //Assert
+        assertEquals(newJoke, result);
+        // Removing the user again so it doesn't mess up the other tests.
+        EntityManager em = emf.createEntityManager();
+        try {
+            em = emf.createEntityManager();
+            em.getTransaction().begin();
+            em.remove(em.find(Student.class, new Long(jokes.size() + 1)));
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
 }

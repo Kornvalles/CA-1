@@ -5,6 +5,7 @@
  */
 package dto;
 
+import entities.Car;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,45 +16,24 @@ import javax.persistence.Id;
  *
  * @author benjaminbajrami
  */
-@Entity
-public class CarDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class CarDTO  {
+    
+    private int year;
+    private String make;
+    private String model;
+    private int price;
 
-    public Long getId() {
-        return id;
+    public CarDTO() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CarDTO)) {
-            return false;
-        }
-        CarDTO other = (CarDTO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "dto.CarDTO[ id=" + id + " ]";
+    public CarDTO(Car car) {
+        this.year = car.getYear();
+        this.make = car.getMake();
+        this.model = car.getModel();
+        this.price = car.getPrice();
     }
     
+    
+
 }
