@@ -2,9 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import entities.Student;
+import facades.Jokefacade;
 import utils.EMF_Creator;
-import facades.Studentfacade;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -25,7 +25,7 @@ public class Jokeresource {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-    private static final Studentfacade FACADE =  Studentfacade.getStudentFacade(EMF);
+    private static final Jokefacade FACADE =  Jokefacade.getJokeFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
     @GET
@@ -37,9 +37,17 @@ public class Jokeresource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
-        long count = FACADE.getStudentCount();
+        long count = FACADE.getJokeCount();
         //System.out.println("--------------->"+count);
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+    }
+    
+    @Path("populate")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String populate() {
+        FACADE.populateJokes();
+        return "{\"msg\":\"done!\"}";
     }
 
  
