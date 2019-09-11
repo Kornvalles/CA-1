@@ -1,6 +1,6 @@
-var url = "";
+var url = "/student/all";
 
-function getStudents() {
+function getStudents(url) {
     fetch(url)
   .then(res => res.json())
   .then(data => {

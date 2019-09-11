@@ -46,7 +46,7 @@ public class Studentfacade {
         
     }
 
-    Student addStudent(Student newStudent) {
+    public Student addStudent(Student newStudent) {
                 EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -61,7 +61,7 @@ public class Studentfacade {
         return null;
     }
 
-    List<StudentDTO> getAllStudents() {
+    public List<StudentDTO> getAllStudents() {
                 EntityManager em = getEntityManager();
         try {
             List<Student> students = em.createNamedQuery("Student.findAll").getResultList();
@@ -75,7 +75,7 @@ public class Studentfacade {
         }
     }
 
-    StudentDTO getStudentById(long id) {
+    public StudentDTO getStudentById(long id) {
                 EntityManager em = emf.createEntityManager();
         try {
             Student student = em.find(Student.class, id);
@@ -85,7 +85,7 @@ public class Studentfacade {
         }
     }
 
-    StudentDTO getStudentByName(String name) {
+    public StudentDTO getStudentByName(String name) {
                 EntityManager em = getEntityManager();
         try {
             return em.createQuery("SELECT new dto.StudentDTO(s) FROM Student s WHERE s.name = :name", StudentDTO.class)

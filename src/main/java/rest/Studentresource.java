@@ -21,7 +21,7 @@ public class Studentresource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/CA",
+                "jdbc:mysql://localhost:3307/CA1",
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
@@ -42,4 +42,11 @@ public class Studentresource {
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
 
+    @Path("all")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getAll() {
+        return GSON.toJson(FACADE.getAllStudents());
+    }
+    
 }
