@@ -1,7 +1,5 @@
-let url = "https://kodebanditterne.dk/CA-1/api/student/all";
-
-function getStudents(url) {
-    fetch(url)
+function getStudents() {
+    fetch("https://kodebanditterne.dk/CA-1/api/student/all")
   .then(res => res.json())
   .then(data => {
    
