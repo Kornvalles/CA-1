@@ -94,7 +94,7 @@ public class JokefacadeTest {
         List<JokeDTO> expResult = new ArrayList<>();
         expResult.add(new JokeDTO(joke));
         //Act
-        List<Joke> result = facade.getAllJokes();
+        List<JokeDTO> result = facade.getAllJokes();
         //Assert
         assertEquals(expResult, result);
     }
@@ -104,17 +104,17 @@ public class JokefacadeTest {
         //Arrange 
         JokeDTO expResult = new JokeDTO(joke);
         //Act
-        Joke result = facade.getJokeById(1);
+        JokeDTO result = facade.getJokeById(1);
         //Assert
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetJokeByRating() throws Exception {
+    public void testGetRandomJoke() throws Exception {
         //Arrange 
-        JokeDTO expResult = new JokeDTO(joke);
+        JokeDTO expResult = facade.getRandomJoke();
         //Act
-        Student result = facade.getJokeByRating(10.0);
+        JokeDTO result = facade.getRandomJoke();
         //Assert
         assertEquals(expResult, result);
     }
