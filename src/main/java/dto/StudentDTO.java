@@ -14,7 +14,7 @@ import entities.Student;
 public class StudentDTO {
     
     private String name;
-    private String student_credentials;
+    private String username;
     private String color;
 
     public StudentDTO() {
@@ -22,7 +22,7 @@ public class StudentDTO {
 
     public StudentDTO(Student stud) {
         this.name = stud.getName();
-        this.student_credentials = stud.getUsername();
+        this.username = stud.getUsername();
         this.color = stud.getColor();
     }  
 }

@@ -29,9 +29,9 @@ public class Student implements Serializable {
     public Student() {
     }
 
-    public Student(String name, String students_credential, String color) {
+    public Student(String name, String username, String color) {
         this.name = name;
-        this.username = students_credential;
+        this.username = username;
         this.color = color;
     }
     
