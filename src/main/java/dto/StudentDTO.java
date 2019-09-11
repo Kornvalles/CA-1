@@ -22,7 +22,7 @@ public class StudentDTO {
 
     public StudentDTO(Student stud) {
         this.name = stud.getName();
-        this.student_credentials = stud.getStudents_credential();
+        this.student_credentials = stud.getUsername();
         this.color = stud.getColor();
     }  
 }

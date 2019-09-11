@@ -23,7 +23,7 @@ public class Student implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String students_credential;
+    private String username;
     private String color;
     
     public Student() {
@@ -31,7 +31,7 @@ public class Student implements Serializable {
 
     public Student(String name, String students_credential, String color) {
         this.name = name;
-        this.students_credential = students_credential;
+        this.username = students_credential;
         this.color = color;
     }
     
@@ -47,12 +47,12 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    public String getStudents_credential() {
-        return students_credential;
+    public String getUsername() {
+        return username;
     }
 
-    public void setStudents_credential(String students_credential) {
-        this.students_credential = students_credential;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getColor() {
@@ -68,7 +68,7 @@ public class Student implements Serializable {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.id);
         hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + Objects.hashCode(this.students_credential);
+        hash = 67 * hash + Objects.hashCode(this.username);
         hash = 67 * hash + Objects.hashCode(this.color);
         return hash;
     }
@@ -94,7 +94,7 @@ public class Student implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.students_credential, other.students_credential)) {
+        if (!Objects.equals(this.username, other.username)) {
             return false;
         }
         return true;
