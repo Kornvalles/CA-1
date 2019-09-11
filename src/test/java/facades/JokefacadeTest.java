@@ -56,11 +56,11 @@ public class JokefacadeTest {
 
     @AfterAll
     public static void tearDownClass() {
-//        Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
+        // Clean up database after test is done or use a persistence unit with drop-and-create to start up clean on every test
     }
 
     // Setup the DataBase in a known state BEFORE EACH TEST
-    //TODO -- Make sure to change the script below to use YOUR OWN entity class
+    // TODO -- Make sure to change the script below to use YOUR OWN entity class
     @BeforeEach
     public void setUp() {
         facade = Jokefacade.getJokeFacade(emf);
@@ -79,7 +79,7 @@ public class JokefacadeTest {
 
     @AfterEach
     public void tearDown() {
-//        Remove any data after each test was run
+        // Remove any data after each test was run
     }
 
     // TODO: Delete or change this method 
@@ -88,7 +88,7 @@ public class JokefacadeTest {
         assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
     }
     
-            @Test
+    @Test
     public void testGetAllStudents() {
         //Arrange
         List<JokeDTO> expResult = new ArrayList<>();
@@ -109,7 +109,7 @@ public class JokefacadeTest {
         assertEquals(expResult, result);
     }
 
-     @Test
+    @Test
     public void testGetJokeByRating() throws Exception {
         //Arrange 
         JokeDTO expResult = new JokeDTO(joke);
@@ -119,7 +119,7 @@ public class JokefacadeTest {
         assertEquals(expResult, result);
     }
     
-     @Test
+    @Test
     public void testAddJoke() {
         //Arrange
         Joke newJoke = new Joke("jokes, meh", "benny", 2.4);
