@@ -90,10 +90,10 @@ public class StudentfacadeTest {
         @Test
     public void testGetAllStudents() {
         //Arrange
-        List<Student> expResult = facade.getAllStudents();
-        
+        List<StudentDTO> expResult = new ArrayList<>();
+        expResult.add(new StudentDTO(student));
         //Act
-        List<Student> result = facade.getAllStudents();
+        List<StudentDTO> result = facade.getAllStudents();
         //Assert
         assertEquals(expResult, result);
     }
@@ -101,9 +101,9 @@ public class StudentfacadeTest {
     @Test
     public void testGetStudentByID() throws Exception {
         //Arrange 
-        Student expResult = facade.getStudentById(1);
+        StudentDTO expResult = new StudentDTO(student);
         //Act
-        Student result = facade.getStudentById(1);
+        StudentDTO result = facade.getStudentById(1);
         //Assert
         assertEquals(expResult, result);
     }
@@ -111,9 +111,9 @@ public class StudentfacadeTest {
      @Test
     public void testGetStudentByName() throws Exception {
         //Arrange 
-        Student expResult = facade.getStudentByName("Mads");
+        StudentDTO expResult = new StudentDTO(student);
         //Act
-        Student result = facade.getStudentByName("Mads");
+        StudentDTO result = facade.getStudentByName("Mads");
         //Assert
         assertEquals(expResult, result);
     }
