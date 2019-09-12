@@ -9,8 +9,8 @@ function getCars() {
   .then(data => {
    
     let rows = data.map(function(name) {
-        let row="<tr> <td>"+name.make+"</td> <td>"+name.model+
-                "</td> <td>"+name.year+"</td><td>"+name.price+"</td> </tr>";
+        let row="<tr> <td>"+name.year+"</td> <td>"+name.make+
+                "</td> <td>"+name.model+"</td><td>"+name.price+"</td> </tr>";
         return row;
     })
     
