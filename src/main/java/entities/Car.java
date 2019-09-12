@@ -6,6 +6,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -84,22 +85,38 @@ public class Car implements Serializable {
         this.price = price;
     }
 
-    
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 5;
+        hash = 83 * hash + this.year;
+        hash = 83 * hash + Objects.hashCode(this.make);
+        hash = 83 * hash + Objects.hashCode(this.model);
+        hash = 83 * hash + this.price;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Car)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Car other = (Car) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Car other = (Car) obj;
+        if (this.year != other.year) {
+            return false;
+        }
+        if (this.price != other.price) {
+            return false;
+        }
+        if (!Objects.equals(this.make, other.make)) {
+            return false;
+        }
+        if (!Objects.equals(this.model, other.model)) {
             return false;
         }
         return true;
@@ -107,7 +124,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Car[ id=" + id + " ]";
+        return "Car{" + "id=" + id + ", year=" + year + ", make=" + make + ", model=" + model + ", price=" + price + '}';
     }
     
 }
