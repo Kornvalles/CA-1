@@ -20,7 +20,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-
+//Todo Remove or change relevant parts before ACTUAL use
 @Path("student")
 public class Studentresource {
 
