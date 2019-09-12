@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,27 +20,28 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-@Disabled
+//@Disabled
 public class CarfacadeTest {
 
     private static EntityManagerFactory emf;
     private static Carfacade facade;
     private static Car car;
-    private static List<Car> cars = new ArrayList<>();
+    private static Car car2;
+    private static List<Car> cars;
 
     public CarfacadeTest() {
     }
 
     //@BeforeAll
-    public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/CA1_test",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-        facade = Carfacade.getCarFacade(emf);
-    }
+//    public static void setUpClass() {
+//        emf = EMF_Creator.createEntityManagerFactory(
+//                "pu",
+//                "jdbc:mysql://localhost:3307/CA1_test",
+//                "dev",
+//                "ax2",
+//                EMF_Creator.Strategy.CREATE);
+//        facade = Carfacade.getCarFacade(emf);
+//    }
 
     /*   **** HINT **** 
         A better way to handle configuration values, compared to the UNUSED example above, is to store those values
@@ -47,11 +49,11 @@ public class CarfacadeTest {
         The file config.properties and the corresponding helper class utils.Settings is added just to do that. 
         See below for how to use these files. This is our RECOMENDED strategy
      */
-//    @BeforeAll
-//    public static void setUpClassV2() {
-//       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-//       facade = Carfacade.getCarFacade(emf);
-//    }
+    @BeforeAll
+    public static void setUpClassV2() {
+       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
+       facade = Carfacade.getCarFacade(emf);
+    }
 
     @AfterAll
     public static void tearDownClass() {
@@ -63,13 +65,24 @@ public class CarfacadeTest {
     @BeforeEach
     public void setUp() {
         facade = Carfacade.getCarFacade(emf);
-        car = new Car(1998, "Toyota", "Corolla", 6000);
+        car = new Car(2008, "Ford", "Mustang GT500", 430000);
+        car2 = new Car(1968, "Ford", "Mustang GT500", 350000);
+        Car car3 = new Car(2010, "Porsche", "Cayenne", 539000);
+        cars = new ArrayList<>();
         cars.add(car);
+        cars.add(car2);
+        cars.add(car3);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            Query query = em.createNativeQuery("truncate table CA1_test.CAR");
+            query.executeUpdate();
+            em.getTransaction().commit();
+            
+            em.getTransaction().begin();
             em.persist(car);
+            em.persist(car2);
+            em.persist(car3);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -84,29 +97,24 @@ public class CarfacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getCarCount(), "Expects two rows in the database");
+        assertEquals(3, facade.getCarCount(), "Expects 3 rows in the database");
     }
     
     @Test
-            @Test
     public void testGetAllCars() {
-            @Test
-    public void testGetAllStudents() {
-            @Test
-    public void testGetAllStudents() {
         //Arrange
-        List<CarDTO> expResult = new ArrayList<>();
-        expResult.add(new CarDTO(car));
+        List<Car> expResult = cars;
         //Act
         List<Car> result = facade.getAllCars();
+        System.out.println(result);
         //Assert
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetStudentByID() throws Exception {
+    public void testGetCarByID() throws Exception {
         //Arrange 
-        CarDTO expResult = new CarDTO(car);
+        Car expResult = car;
         //Act
         Car result = facade.getCarById(1);
         //Assert
@@ -114,18 +122,13 @@ public class CarfacadeTest {
     }
 
      @Test
-    public void testGetCarByMake() throws Exception {
+    public void testGetCarsByMake() throws Exception {
         //Arrange 
         List<Car> expResult = new ArrayList<>();
         expResult.add(car);
         expResult.add(car2);
-        CarDTO expResult = new CarDTO(car);
-        CarDTO expResult = new CarDTO(car);
-        List<CarDTO> expResult = new ArrayList<>();
-        //does this need an if-statement or something guys? 
-        expResult.add(new CarDTO(car));
         //Act
-        Car result = facade.getCarByMake("Toyota");
+        List<Car> result = facade.getCarsByMake(car.getMake());
         //Assert
         assertEquals(expResult, result);
     }
@@ -138,16 +141,7 @@ public class CarfacadeTest {
         Car result = facade.MakeCar(newCar);
         //Assert
         assertEquals(newCar, result);
-        // Removing the user again so it doesn't mess up the other tests.
-        EntityManager em = emf.createEntityManager();
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.remove(em.find(Car.class, new Long(cars.size() + 1)));
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
+        
     }
 
 }
