@@ -88,7 +88,7 @@ public class CarfacadeTest {
     }
     
             @Test
-    public void testGetAllStudents() {
+    public void testGetAllCars() {
         //Arrange
         List<CarDTO> expResult = new ArrayList<>();
         expResult.add(new CarDTO(car));
@@ -99,7 +99,7 @@ public class CarfacadeTest {
     }
 
     @Test
-    public void testGetStudentByID() throws Exception {
+    public void testGetCarByID() throws Exception {
         //Arrange 
         CarDTO expResult = new CarDTO(car);
         //Act
@@ -109,11 +109,13 @@ public class CarfacadeTest {
     }
 
      @Test
-    public void testGetCarByMake() throws Exception {
+    public void testGetCarsByMake() throws Exception {
         //Arrange 
-        CarDTO expResult = new CarDTO(car);
+        List<CarDTO> expResult = new ArrayList<>();
+        //does this need an if-statement or something guys? 
+        expResult.add(new CarDTO(car));
         //Act
-        Car result = facade.getCarByMake("Toyota");
+        List<Car> result = facade.getCarsByMake(car.getMake());
         //Assert
         assertEquals(expResult, result);
     }
