@@ -91,10 +91,10 @@ public class JokefacadeTest {
     @Test
     public void testGetAllStudents() {
         //Arrange
-        List<JokeDTO> expResult = new ArrayList<>();
-        expResult.add(new JokeDTO(joke));
+        List<Joke> expResult = new ArrayList<>();
+        expResult.add(new Joke(joke));
         //Act
-        List<JokeDTO> result = facade.getAllJokes();
+        List<Joke> result = facade.getAllJokes();
         //Assert
         assertEquals(expResult, result);
     }

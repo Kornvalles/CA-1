@@ -2,7 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.JokeDTO;
+import entities.Joke;
 import facades.Jokefacade;
+import java.util.ArrayList;
+import java.util.List;
 import utils.EMF_Creator;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -47,14 +51,20 @@ public class Jokeresource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRandom() {
-        return GSON.toJson(FACADE.getRandomJoke());
+        return GSON.toJson(new JokeDTO(FACADE.getRandomJoke()));
     }
 
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getAll() {
-        return GSON.toJson(FACADE.getAllJokes());
+        List<Joke> joke = FACADE.getAllJokes();
+        List<JokeDTO> jdto = new ArrayList();
+        
+        for(Joke j : joke) {
+        jdto.add(new JokeDTO(j));
+        }
+        return GSON.toJson(jdto);
     }
 
     @Path("populate")

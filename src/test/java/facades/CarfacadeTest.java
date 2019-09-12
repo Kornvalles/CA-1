@@ -128,7 +128,7 @@ public class CarfacadeTest {
         expResult.add(car);
         expResult.add(car2);
         //Act
-        List<Car> result = facade.getCarsByMake(car.getMake());
+        List<Car> result = facade.getCarByMake(car.getMake());
         //Assert
         assertEquals(expResult, result);
     }

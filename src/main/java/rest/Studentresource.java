@@ -2,9 +2,12 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.StudentDTO;
 import entities.Student;
 import utils.EMF_Creator;
 import facades.Studentfacade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -47,9 +50,28 @@ public class Studentresource {
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAll() {
-        return GSON.toJson(FACADE.getAllStudents());
+        public String getAll() {
+        List<Student> student = FACADE.getAllStudents();
+        List<StudentDTO> sdto = new ArrayList();
+        
+        for(Student s : student) {
+        sdto.add(new StudentDTO(s));
+        }
+        return GSON.toJson(sdto);
     }
+    
+    @GET
+    @Path("/names/{name}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String byName(@PathParam("name") String name) {
+        List<Student> students = FACADE.findStudentByName(name);
+        List<StudentDTO> sdto = new ArrayList<>();
+        for (Student s : students) {
+            sdto.add(new StudentDTO(s));
+        }
+        return GSON.toJson(FACADE.findStudentByName(name));
+    }
+    
     
     @Path("populate")
     @GET
