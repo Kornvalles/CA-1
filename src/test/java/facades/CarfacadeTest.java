@@ -101,8 +101,13 @@ public class CarfacadeTest {
     }
     
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Test
     public void testGetAllCars() {
+=======
+            @Test
+    public void testGetAllStudents() {
+>>>>>>> parent of fc7bdaa... CarFacade is done
 =======
             @Test
     public void testGetAllStudents() {
@@ -130,9 +135,13 @@ public class CarfacadeTest {
     public void testGetCarByMake() throws Exception {
         //Arrange 
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<Car> expResult = new ArrayList<>();
         expResult.add(car);
         expResult.add(car2);
+=======
+        CarDTO expResult = new CarDTO(car);
+>>>>>>> parent of fc7bdaa... CarFacade is done
 =======
         CarDTO expResult = new CarDTO(car);
 >>>>>>> parent of fc7bdaa... CarFacade is done

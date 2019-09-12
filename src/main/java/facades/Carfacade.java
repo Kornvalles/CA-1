@@ -54,6 +54,7 @@ public class Carfacade {
 
     Car getCarById(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+<<<<<<< HEAD
     }
 
     List<Car> getAllCars() {
@@ -81,6 +82,12 @@ public class Carfacade {
         } finally {
             em.close();
         }
+=======
+    }
+
+    List<Car> getAllCars() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of fc7bdaa... CarFacade is done
     }
 
 }
