@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,21 +27,22 @@ public class JokefacadeTest {
     private static EntityManagerFactory emf;
     private static Jokefacade facade;
     private static Joke joke;
-    private static List<Joke> jokes = new ArrayList<>();
+    private static Joke joke2;
+    private static List<Joke> jokes;
 
     public JokefacadeTest() {
     }
 
     //@BeforeAll
-    public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/CA1_test",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-        facade = Jokefacade.getJokeFacade(emf);
-    }
+//    public static void setUpClass() {
+//        emf = EMF_Creator.createEntityManagerFactory(
+//                "pu",
+//                "jdbc:mysql://localhost:3307/CA1_test",
+//                "dev",
+//                "ax2",
+//                EMF_Creator.Strategy.CREATE);
+//        facade = Jokefacade.getJokeFacade(emf);
+//    }
 
     /*   **** HINT **** 
         A better way to handle configuration values, compared to the UNUSED example above, is to store those values
@@ -48,11 +50,11 @@ public class JokefacadeTest {
         The file config.properties and the corresponding helper class utils.Settings is added just to do that. 
         See below for how to use these files. This is our RECOMENDED strategy
      */
-//    @BeforeAll
-//    public static void setUpClassV2() {
-//       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-//       facade = Jokefacade.getJokeFacade(emf);
-//    }
+    @BeforeAll
+    public static void setUpClassV2() {
+       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
+       facade = Jokefacade.getJokeFacade(emf);
+    }
 
     @AfterAll
     public static void tearDownClass() {
@@ -65,12 +67,24 @@ public class JokefacadeTest {
     public void setUp() {
         facade = Jokefacade.getJokeFacade(emf);
         joke = new Joke("joke, HAHA","Hr. HA", 10.0);
+        joke2 = new Joke("joke2, HAHA","Hr. HA", 10.0);
+        Joke joke3 = new Joke("joke3, HAHA", "Hr. HA", 10.0);
+        jokes = new ArrayList<>();
         jokes.add(joke);
+        jokes.add(joke2);
+        jokes.add(joke3);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Joke.deleteAllRows").executeUpdate();
+            Query query = em.createNamedQuery("truncate table CA1_test.CAR");
+            query.executeUpdate();
+            em.getTransaction().commit();
+            
+            em.getTransaction().commit();
+            em.getTransaction().begin();
             em.persist(joke);
+            em.persist(joke2);
+            em.persist(joke3);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -85,26 +99,26 @@ public class JokefacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(2, facade.getJokeCount(), "Expects two rows in the database");
+        assertEquals(3, facade.getJokeCount(), "Expects 3 rows in the database");
     }
     
     @Test
-    public void testGetAllStudents() {
+    public void testGetAllJoke() {
         //Arrange
-        List<Joke> expResult = new ArrayList<>();
-        expResult.add(new Joke(joke));
+        List<Joke> expResult = jokes;
         //Act
         List<Joke> result = facade.getAllJokes();
+        System.out.println(result);
         //Assert
         assertEquals(expResult, result);
     }
 
     @Test
-    public void testGetStudentByID() throws Exception {
+    public void testGetJokeByID() throws Exception {
         //Arrange 
-        JokeDTO expResult = new JokeDTO(joke);
+        Joke expResult = joke;
         //Act
-        JokeDTO result = facade.getJokeById(1);
+        Joke result = facade.getJokeById(1);
         //Assert
         assertEquals(expResult, result);
     }
@@ -112,31 +126,21 @@ public class JokefacadeTest {
     @Test
     public void testGetRandomJoke() throws Exception {
         //Arrange 
-        JokeDTO expResult = facade.getRandomJoke();
+        Joke expResult = facade.getRandomJoke();
         //Act
-        JokeDTO result = facade.getRandomJoke();
+        Joke result = facade.getRandomJoke();
         //Assert
         assertEquals(expResult, result);
     }
     
-    @Test
+     @Test
     public void testAddJoke() {
         //Arrange
-        Joke newJoke = new Joke("jokes, meh", "benny", 2.4);
+        Joke newJoke = new Joke("test", "test", 1.0);
         //Act
         Joke result = facade.addJoke(newJoke);
         //Assert
         assertEquals(newJoke, result);
-        // Removing the user again so it doesn't mess up the other tests.
-        EntityManager em = emf.createEntityManager();
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.remove(em.find(Student.class, new Long(jokes.size() + 1)));
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
     }
 
 }

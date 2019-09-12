@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -25,21 +26,22 @@ public class StudentfacadeTest {
     private static EntityManagerFactory emf;
     private static Studentfacade facade;
     private static Student student;
-    private static List<Student> students = new ArrayList<>();
+    private static Student student2;
+    private static List<Student> students;
 
     public StudentfacadeTest() {
     }
 
     //@BeforeAll
-    public static void setUpClass() {
-        emf = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/CA1_test",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-        facade = Studentfacade.getStudentFacade(emf);
-    }
+//    public static void setUpClass() {
+//        emf = EMF_Creator.createEntityManagerFactory(
+//                "pu",
+//                "jdbc:mysql://localhost:3307/CA1_test",
+//                "dev",
+//                "ax2",
+//                EMF_Creator.Strategy.CREATE);
+//        facade = Studentfacade.getStudentFacade(emf);
+//    }
 
     /*   **** HINT **** 
         A better way to handle configuration values, compared to the UNUSED example above, is to store those values
@@ -48,10 +50,10 @@ public class StudentfacadeTest {
         See below for how to use these files. This is our RECOMENDED strategy
      */
 //    @BeforeAll
-//    public static void setUpClassV2() {
-//       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
-//       facade = Studentfacade.getStudentFacade(emf);
-//    }
+    public static void setUpClassV2() {
+       emf = EMF_Creator.createEntityManagerFactory(DbSelector.TEST,Strategy.DROP_AND_CREATE);
+       facade = Studentfacade.getStudentFacade(emf);
+    }
 
     @AfterAll
     public static void tearDownClass() {
@@ -63,13 +65,24 @@ public class StudentfacadeTest {
     @BeforeEach
     public void setUp() {
         facade = Studentfacade.getStudentFacade(emf);
-        student = new Student("Mads", "cph-mj12", "grøn");
+        student = new Student("Mads", "cphmj12", "grøn");
+        student2 = new Student("Mads2", "cphmj13", "grøn");
+        Student student3 = new Student("Mads3", "cphmj14","grøn");
+        students = new ArrayList<>();
         students.add(student);
+        students.add(student2);
+        students.add(student3);
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("Student.deleteAllRows").executeUpdate();
+            Query query = em.createNativeQuery("truncate table CA1_test.STUDENT");
+            query.executeUpdate();
+            em.getTransaction().commit();
+            
+            em.getTransaction().begin();
             em.persist(student);
+            em.persist(student2);
+            em.persist(student3);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -84,16 +97,16 @@ public class StudentfacadeTest {
     // TODO: Delete or change this method 
     @Test
     public void testAFacadeMethod() {
-        assertEquals(1, facade.getStudentCount(), "Expects two rows in the database");
+        assertEquals(3, facade.getStudentCount(), "Expects two rows in the database");
     }
     
-        @Test
+    @Test
     public void testGetAllStudents() {
         //Arrange
-        List<StudentDTO> expResult = new ArrayList<>();
-        expResult.add(new StudentDTO(student));
+        List<Student> expResult = students;
         //Act
-        List<StudentDTO> result = facade.getAllStudents();
+        List<Student> result = facade.getAllStudents();
+        System.out.println(result);
         //Assert
         assertEquals(expResult, result);
     }
@@ -101,9 +114,9 @@ public class StudentfacadeTest {
     @Test
     public void testGetStudentByID() throws Exception {
         //Arrange 
-        StudentDTO expResult = new StudentDTO(student);
+        Student expResult = student;
         //Act
-        StudentDTO result = facade.getStudentById(1);
+        Student result = facade.getStudentById(1);
         //Assert
         assertEquals(expResult, result);
     }
@@ -111,9 +124,9 @@ public class StudentfacadeTest {
      @Test
     public void testGetStudentByName() throws Exception {
         //Arrange 
-        StudentDTO expResult = new StudentDTO(student);
+        Student expResult = student;
         //Act
-        StudentDTO result = facade.getStudentByName("Mads");
+        Student result = facade.getStudentByName("Mads");
         //Assert
         assertEquals(expResult, result);
     }

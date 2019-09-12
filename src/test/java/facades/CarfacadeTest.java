@@ -116,7 +116,7 @@ public class CarfacadeTest {
         //Arrange 
         Car expResult = car;
         //Act
-        Car result = facade.getCarById(1);
+        Car result = facade.getCarById(14);
         //Assert
         assertEquals(expResult, result);
     }
