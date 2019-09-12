@@ -100,8 +100,13 @@ public class CarfacadeTest {
         assertEquals(3, facade.getCarCount(), "Expects 3 rows in the database");
     }
     
+<<<<<<< HEAD
     @Test
     public void testGetAllCars() {
+=======
+            @Test
+    public void testGetAllStudents() {
+>>>>>>> parent of fc7bdaa... CarFacade is done
         //Arrange
         List<Car> expResult = cars;
         //Act
@@ -112,7 +117,7 @@ public class CarfacadeTest {
     }
 
     @Test
-    public void testGetCarByID() throws Exception {
+    public void testGetStudentByID() throws Exception {
         //Arrange 
         Car expResult = car;
         //Act
@@ -122,13 +127,17 @@ public class CarfacadeTest {
     }
 
      @Test
-    public void testGetCarsByMake() throws Exception {
+    public void testGetCarByMake() throws Exception {
         //Arrange 
+<<<<<<< HEAD
         List<Car> expResult = new ArrayList<>();
         expResult.add(car);
         expResult.add(car2);
+=======
+        CarDTO expResult = new CarDTO(car);
+>>>>>>> parent of fc7bdaa... CarFacade is done
         //Act
-        List<Car> result = facade.getCarsByMake(car.getMake());
+        Car result = facade.getCarByMake("Toyota");
         //Assert
         assertEquals(expResult, result);
     }
