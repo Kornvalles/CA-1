@@ -61,34 +61,30 @@ public class Studentfacade {
         return null;
     }
 
-    public List<StudentDTO> getAllStudents() {
+    public List<Student> getAllStudents() {
                 EntityManager em = getEntityManager();
         try {
             List<Student> students = em.createNamedQuery("Student.findAll").getResultList();
-            List<StudentDTO> result = new ArrayList<>();
-            for(Student student: students){
-                result.add(new StudentDTO(student));
-            }
-            return result;
+            return students;
         } finally {
             em.close();
         }
     }
 
-    public StudentDTO getStudentById(long id) {
+    public Student getStudentById(long id) {
                 EntityManager em = emf.createEntityManager();
         try {
             Student student = em.find(Student.class, id);
-            return new StudentDTO(student); 
+            return student;
         } finally {
             em.close();
         }
     }
 
-    public StudentDTO getStudentByName(String name) {
+    public Student getStudentByName(String name) {
                 EntityManager em = getEntityManager();
         try {
-            return em.createQuery("SELECT new dto.StudentDTO(s) FROM Student s WHERE s.name = :name", StudentDTO.class)
+            return em.createQuery("SELECT new entities.Student(s) FROM Student s WHERE s.name = :name", Student.class)
                     .setParameter("name", name).getSingleResult();
         } finally {
             em.close();

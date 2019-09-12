@@ -2,7 +2,11 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.JokeDTO;
+import entities.Joke;
 import facades.Jokefacade;
+import java.util.ArrayList;
+import java.util.List;
 import utils.EMF_Creator;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,6 +38,19 @@ public class Jokeresource {
         return "{\"msg\":\"Hello World\"}";
     }
 
+    @GET
+    @Path("all")
+    @Produces({MediaType.APPLICATION_JSON})
+    public String allJokes() {
+        List<Joke> joke = FACADE.getAllJokes();
+        List<JokeDTO> jdto = new ArrayList();
+
+        for (Joke e : joke) {
+            jdto.add(new JokeDTO(e));
+        }
+        return GSON.toJson(jdto);
+    }
+
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -47,14 +64,14 @@ public class Jokeresource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRandom() {
-        return GSON.toJson(FACADE.getRandomJoke());
+        return GSON.toJson(new JokeDTO(FACADE.getRandomJoke()));
     }
 
-    @Path("all")
+    @Path("/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAll() {
-        return GSON.toJson(FACADE.getAllJokes());
+    public String getJokeById(@PathParam("id") long id) {
+        return GSON.toJson(new JokeDTO(FACADE.getJokeById(id)));
     }
 
     @Path("populate")

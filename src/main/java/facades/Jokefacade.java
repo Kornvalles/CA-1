@@ -64,31 +64,27 @@ public class Jokefacade {
         return null;
     }
 
-    public JokeDTO getRandomJoke() {
-        List<JokeDTO> jokes = getAllJokes();
+    public Joke getRandomJoke() {
+        List<Joke> jokes = getAllJokes();
         long randomNumber = (long) (Math.random() * jokes.size() + 1);
         return getJokeById(randomNumber);
     }
 
-    public JokeDTO getJokeById(long id) {
+    public Joke getJokeById(long id) {
         EntityManager em = getEntityManager();
         try {
             Joke joke = em.find(Joke.class, id);
-            return new JokeDTO(joke);
+            return joke;
         } finally {
             em.close();
         }
     }
 
-    public List<JokeDTO> getAllJokes() {
+    public List<Joke> getAllJokes() {
         EntityManager em = getEntityManager();
         try {
             List<Joke> jokes = em.createNamedQuery("Joke.findAll").getResultList();
-            List<JokeDTO> result = new ArrayList();
-            for (Joke joke : jokes) {
-                result.add(new JokeDTO(joke));
-            }
-            return result;
+            return jokes;
         } finally {
             em.close();
         }
