@@ -87,22 +87,13 @@ public class CarfacadeTest {
         assertEquals(2, facade.getCarCount(), "Expects two rows in the database");
     }
     
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     @Test
-=======
             @Test
->>>>>>> parent of 0ed5c06... CarfacadeTest is green! YAY
     public void testGetAllCars() {
-=======
             @Test
     public void testGetAllStudents() {
->>>>>>> parent of fc7bdaa... CarFacade is done
-=======
             @Test
     public void testGetAllStudents() {
->>>>>>> parent of fc7bdaa... CarFacade is done
         //Arrange
         List<CarDTO> expResult = new ArrayList<>();
         expResult.add(new CarDTO(car));
@@ -125,23 +116,14 @@ public class CarfacadeTest {
      @Test
     public void testGetCarByMake() throws Exception {
         //Arrange 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         List<Car> expResult = new ArrayList<>();
         expResult.add(car);
         expResult.add(car2);
-=======
         CarDTO expResult = new CarDTO(car);
->>>>>>> parent of fc7bdaa... CarFacade is done
-=======
         CarDTO expResult = new CarDTO(car);
->>>>>>> parent of fc7bdaa... CarFacade is done
-=======
         List<CarDTO> expResult = new ArrayList<>();
         //does this need an if-statement or something guys? 
         expResult.add(new CarDTO(car));
->>>>>>> parent of 0ed5c06... CarfacadeTest is green! YAY
         //Act
         Car result = facade.getCarByMake("Toyota");
         //Assert
