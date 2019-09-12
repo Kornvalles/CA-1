@@ -61,6 +61,7 @@ public class Carfacade {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+<<<<<<< HEAD
     public void populateCars() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -90,4 +91,6 @@ public class Carfacade {
 >>>>>>> parent of fc7bdaa... CarFacade is done
     }
 
+=======
+>>>>>>> parent of a402c40... Update Carfacade.java
 }
