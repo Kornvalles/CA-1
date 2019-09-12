@@ -19,6 +19,6 @@ function getJokes() {
 })
 }
 
-document.getElementById("button").onclick = getStudents;
+document.getElementById("button").onclick = getJokes;
 
 
