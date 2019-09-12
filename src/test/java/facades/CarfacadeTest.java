@@ -65,9 +65,9 @@ public class CarfacadeTest {
     @BeforeEach
     public void setUp() {
         facade = Carfacade.getCarFacade(emf);
-        car = new Car(2008, "Ford", "Mustang GT500", 430000);
-        car2 = new Car(1968, "Ford", "Mustang GT500", 350000);
-        Car car3 = new Car(2010, "Porsche", "Cayenne", 539000);
+        car = new Car("Ford", "Mustang GT500",2008, 430000);
+        car2 = new Car("Ford", "Mustang GT500",1968, 350000);
+        Car car3 = new Car("Porsche", "Cayenne",2010, 539000);
         cars = new ArrayList<>();
         cars.add(car);
         cars.add(car2);
@@ -136,7 +136,7 @@ public class CarfacadeTest {
      @Test
     public void testMakeCar() {
         //Arrange
-        Car newCar = new Car(2018, "Tesla", "Model 3", 399999);
+        Car newCar = new Car("Tesla", "Model 3",2018, 399999);
         //Act
         Car result = facade.MakeCar(newCar);
         //Assert

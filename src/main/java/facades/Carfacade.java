@@ -92,18 +92,18 @@ public class Carfacade {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Car.deleteAllRows").executeUpdate();
-            em.persist(new Car(2008, "Maserati", "GranTurismo", 490000));
-            em.persist(new Car(2013, "Maserati", "GranCabrio", 525000));
-            em.persist(new Car(2008, "Ford", "Mustang GT500", 430000));
-            em.persist(new Car(1968, "Ford", "Mustang GT500", 350000));
-            em.persist(new Car(2016, "Porsche", "Macan", 749900));
-            em.persist(new Car(2016, "Porsche", "Carrera", 1999900));
-            em.persist(new Car(2010, "Porsche", "Cayenne", 539000));
-            em.persist(new Car(2018, "Ferrari", "Portofino", 1600000));
-            em.persist(new Car(2019, "Ferrari", "Superfast", 2599000));
-            em.persist(new Car(2009, "Ferrari", "California", 595000));
-            em.persist(new Car(2017, "Bentley", "Continental", 1135000));
-            em.persist(new Car(1957, "Bentley", "Saloon", 585000));
+            em.persist(new Car("Maserati", "GranTurismo",2008, 490000));
+            em.persist(new Car("Maserati", "GranCabrio",2013, 525000));
+            em.persist(new Car("Ford", "Mustang GT500",2007, 430000));
+            em.persist(new Car("Ford", "Mustang GT500",1968, 350000));
+            em.persist(new Car("Porsche", "Macan",2016, 749900));
+            em.persist(new Car("Porsche", "Carrera",2017, 1999900));
+            em.persist(new Car("Porsche", "Cayenne",2010, 539000));
+            em.persist(new Car("Ferrari", "Portofino",2019, 1600000));
+            em.persist(new Car("Ferrari", "Superfast",2020, 2599000));
+            em.persist(new Car("Ferrari", "California",2009, 595000));
+            em.persist(new Car("Bentley", "Continental",2017, 1135000));
+            em.persist(new Car("Bentley", "Saloon",1957, 585000));
             em.getTransaction().commit();
         } finally {
             em.close();

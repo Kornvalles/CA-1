@@ -29,20 +29,21 @@ public class Car implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private int year;
     private String make;
     private String model;
+    private int year;
     private int price;
 
     public Car() {
     }
 
-    public Car(int year, String make, String model, int price) {
-        this.year = year;
+    public Car(String make, String model, int year, int price) {
         this.make = make;
         this.model = model;
+        this.year = year;
         this.price = price;
     }
+
     
     public Long getId() {
         return id;
