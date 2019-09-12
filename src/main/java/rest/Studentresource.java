@@ -2,9 +2,12 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dto.StudentDTO;
 import entities.Student;
 import utils.EMF_Creator;
 import facades.Studentfacade;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -44,13 +47,33 @@ public class Studentresource {
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
     }
 
-    @Path("all")
     @GET
+    @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAll() {
-        return GSON.toJson(FACADE.getAllStudents());
+    public String allJokes() {
+        List<Student> students = FACADE.getAllStudents();
+        List<StudentDTO> sdto = new ArrayList();
+
+        for (Student e : students) {
+            sdto.add(new StudentDTO(e));
+        }
+        return GSON.toJson(sdto);
     }
     
+    @Path("/{id}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getJokeById(@PathParam("id") long id) {
+        return GSON.toJson(new StudentDTO(FACADE.getStudentById(id)));
+    }
+    
+    @Path("/{name}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getJokeById(@PathParam("name") String name) {
+        return GSON.toJson(new StudentDTO(FACADE.getStudentByName(name)));
+    }
+   
     @Path("populate")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
