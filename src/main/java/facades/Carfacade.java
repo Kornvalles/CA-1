@@ -86,4 +86,27 @@ public class Carfacade {
         }
     }
 
+    public void populateCars() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.createNamedQuery("Car.deleteAllRows").executeUpdate();
+            em.persist(new Car(2008, "Maserati", "GranTurismo", 490000));
+            em.persist(new Car(2013, "Maserati", "GranCabrio", 525000));
+            em.persist(new Car(2008, "Ford", "Mustang GT500", 430000));
+            em.persist(new Car(1968, "Ford", "Mustang GT500", 350000));
+            em.persist(new Car(2016, "Porsche", "Macan", 749900));
+            em.persist(new Car(2016, "Porsche", "Carrera", 1999900));
+            em.persist(new Car(2010, "Porsche", "Cayenne", 539000));
+            em.persist(new Car(2018, "Ferrari", "Portofino", 1600000));
+            em.persist(new Car(2019, "Ferrari", "Superfast", 2599000));
+            em.persist(new Car(2009, "Ferrari", "California", 595000));
+            em.persist(new Car(2017, "Bentley", "Continental", 1135000));
+            em.persist(new Car(1957, "Bentley", "Saloon", 585000));
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
 }
