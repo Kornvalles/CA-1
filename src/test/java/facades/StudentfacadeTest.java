@@ -20,7 +20,7 @@ import utils.EMF_Creator.DbSelector;
 import utils.EMF_Creator.Strategy;
 
 //Uncomment the line below, to temporarily disable this test
-@Disabled
+//@Disabled
 public class StudentfacadeTest {
 
     private static EntityManagerFactory emf;
@@ -67,7 +67,7 @@ public class StudentfacadeTest {
         facade = Studentfacade.getStudentFacade(emf);
         student = new Student("Mads", "cphmj12", "grøn");
         student2 = new Student("Mads2", "cphmj13", "grøn");
-        Student student3 = new Student("Mads3", "cphmj14","grøn");
+        Student student3 = new Student("Mads3", "cphmj14", "grøn");
         students = new ArrayList<>();
         students.add(student);
         students.add(student2);
@@ -78,7 +78,7 @@ public class StudentfacadeTest {
             Query query = em.createNativeQuery("truncate table CA1_test.STUDENT");
             query.executeUpdate();
             em.getTransaction().commit();
-            
+
             em.getTransaction().begin();
             em.persist(student);
             em.persist(student2);
@@ -99,7 +99,7 @@ public class StudentfacadeTest {
     public void testAFacadeMethod() {
         assertEquals(3, facade.getStudentCount(), "Expects two rows in the database");
     }
-    
+
     @Test
     public void testGetAllStudents() {
         //Arrange
@@ -121,7 +121,7 @@ public class StudentfacadeTest {
         assertEquals(expResult, result);
     }
 
-     @Test
+    @Test
     public void testGetStudentByName() throws Exception {
         //Arrange 
         Student expResult = student;
@@ -130,25 +130,15 @@ public class StudentfacadeTest {
         //Assert
         assertEquals(expResult, result);
     }
-    
+
      @Test
-    public void testAddStudent() {
+    public void testMakeCar() {
         //Arrange
-        Student newStudent = new Student("Thies", "cph-TD43", "rød");
+        Student newStudent = new Student("Mads", "cphmj12", "grøn");
         //Act
         Student result = facade.addStudent(newStudent);
         //Assert
         assertEquals(newStudent, result);
-        // Removing the user again so it doesn't mess up the other tests.
-        EntityManager em = emf.createEntityManager();
-        try {
-            em = emf.createEntityManager();
-            em.getTransaction().begin();
-            em.remove(em.find(Student.class, new Long(students.size() + 1)));
-            em.getTransaction().commit();
-        } finally {
-            em.close();
-        }
+        
     }
 }
-

@@ -65,8 +65,8 @@ public class Studentfacade {
     public List<Student> getAllStudents() {
         EntityManager em = getEntityManager();
         try {
-            List<Student> students = em.createNamedQuery("Student.findAll").getResultList();
-            return students;
+            TypedQuery<Student> query = em.createQuery("SELECT s FROM Student s", Student.class);
+            return query.getResultList();
         } finally {
             em.close();
         }

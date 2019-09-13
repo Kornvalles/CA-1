@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -83,13 +84,13 @@ public class Jokefacade {
     public List<Joke> getAllJokes() {
         EntityManager em = getEntityManager();
         try {
-            List<Joke> jokes = em.createNamedQuery("Joke.findAll").getResultList();
-            return jokes;
+            TypedQuery<Joke> query = em.createQuery("SELECT j FROM Joke j", Joke.class);
+            return query.getResultList();
         } finally {
             em.close();
         }
     }
-    
+
     public void populateJokes() {
         EntityManager em = getEntityManager();
         try {
