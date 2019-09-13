@@ -44,3 +44,54 @@ function filterCars() {
 }
 
 document.getElementById("carMakeInput").onkeyup = filterCars;
+
+function sortByPriceD() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("carTable");
+    switching = true;
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[3];
+            y = rows[i + 1].getElementsByTagName("td")[3];
+            if (x.innerHTML < y.innerHTML) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+function sortByPriceA() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("carTable");
+    switching = true;
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[3];
+            y = rows[i + 1].getElementsByTagName("td")[3];
+            if (x.innerHTML > y.innerHTML) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+    }
+}
+
+document.getElementById("sortButtonD").onclick = sortByPriceD;
+document.getElementById("sortButtonA").onclick = sortByPriceA;
