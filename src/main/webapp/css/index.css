@@ -7,6 +7,8 @@ and open the template in the editor.
     Created on : Sep 11, 2019, 12:52:11 PM
     Author     : ndupo
 */
+@import url("https://fonts.googleapis.com/css?family=Lato:900");
+
 html {
     background: url(https://www.awaltzthroughdisney.com/uploads/6/2/7/6/6276678/mickey-mouse-short-touchdown-and-out-6_orig.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -15,6 +17,7 @@ html {
     background-size: cover;
     height: 100%;
 }
+
 body {
     height: 100%;
 }
@@ -55,19 +58,21 @@ h1, thead, div {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-@import url(https://fonts.googleapis.com/css?family=Lato:900);
 *, *:before, *:after{
     box-sizing:border-box;
 }
+
 body{
     font-family: 'Lato', sans-serif;
     ;
 }
+
 div.foo{
     width: 90%;
     margin: 0 auto;
     text-align: center;
 }
+
 .letter{
     display: inline-block;
     font-weight: 900;
@@ -79,8 +84,8 @@ div.foo{
     perspective: 400;
     z-index: 1;
     opacity: 0.9;
-
 }
+
 .letter:before, .letter:after{
     position:absolute;
     content: attr(data-letter);
@@ -88,9 +93,11 @@ div.foo{
     top:0;
     left:0;
 }
+
 .letter, .letter:before, .letter:after{
     transition: all 0.3s ease-in-out;
 }
+
 .letter:before{
     color: #ffffff;
     text-shadow: 
@@ -101,9 +108,10 @@ div.foo{
         rotateX(0deg)
         rotateY(-15deg)
         rotateZ(0deg);
-       -webkit-text-stroke-width: 2px;
-   -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: black;
 }
+
 .letter:after{
     color: rgba(0,0,0,.11);
     z-index:2;
@@ -114,6 +122,7 @@ div.foo{
         rotateZ(0deg)
         skew(0deg,1deg);
 }
+
 .letter:hover:before{
     color: #fafafa;
     transform:
@@ -121,6 +130,7 @@ div.foo{
         rotateY(-40deg)
         rotateZ(0deg);
 }
+
 .letter:hover:after{
     transform:
         scale(1.08,1)
