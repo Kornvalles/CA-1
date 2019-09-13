@@ -10,7 +10,9 @@ function getStudents() {
     })
     
     let rowsAsString = rows.join("");
-    document.getElementById("tbody").innerHTML = rowsAsString;
+    let rowAsThead = "<tr><th>Student Id</th><th>Name</th><th>Color</th></tr>";
+        document.getElementById("thead").innerHTML = rowAsThead;
+        document.getElementById("tbody").innerHTML = rowsAsString;
 })
 }
 
