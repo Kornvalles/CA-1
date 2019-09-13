@@ -71,14 +71,15 @@ div.foo{
 .letter{
     display: inline-block;
     font-weight: 900;
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 0.2em;
     position: relative;
     color: #FF0000;
     transform-style: preserve-3d;
     perspective: 400;
     z-index: 1;
-    opacity: 0.5;
+    opacity: 0.9;
+
 }
 .letter:before, .letter:after{
     position:absolute;
@@ -91,7 +92,7 @@ div.foo{
     transition: all 0.3s ease-in-out;
 }
 .letter:before{
-    color: #A8A8A8;
+    color: #ffffff;
     text-shadow: 
         -1px 0px 1px rgba(255,255,255,.8),
         1px 0px 1px rgba(0,0,0,.8);
@@ -100,6 +101,8 @@ div.foo{
         rotateX(0deg)
         rotateY(-15deg)
         rotateZ(0deg);
+       -webkit-text-stroke-width: 2px;
+   -webkit-text-stroke-color: black;
 }
 .letter:after{
     color: rgba(0,0,0,.11);
@@ -128,19 +131,21 @@ div.foo{
 }
 
 table {
-    /*background-image: url('/css/searchicon.png');*/
+    color: #ffffff;
     background-position: 10px 10px;
     background-repeat: no-repeat;
-    width: 100%;
+    width: 400px;
     font-size: 16px;
     padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-bottom: 12px;
+    background-color: #000000;
+    opacity: 0.9;
 }
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    width: 400px;
     border: 1px solid #ddd;
     font-size: 18px;
 }
@@ -155,5 +160,5 @@ table tr {
 }
 
 table tr.header, table tr:hover {
-    background-color: #f1f1f1;
+    background-color: #676767;
 }
