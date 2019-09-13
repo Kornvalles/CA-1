@@ -45,7 +45,7 @@ function filterCars() {
 
 document.getElementById("carMakeInput").onkeyup = filterCars;
 
-function sortByPrice() {
+function sortByPriceD() {
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("carTable");
     switching = true;
@@ -53,11 +53,11 @@ function sortByPrice() {
     while (switching) {
         switching = false;
         rows = table.rows;
-        for (i = 0; i < (rows.length - 1); i++) {
+        for (i = 1; i < (rows.length - 1); i++) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[3];
             y = rows[i + 1].getElementsByTagName("td")[3];
-            if (x.innerHTML > y.innerHTML) {
+            if (x.innerHTML < y.innerHTML) {
                 shouldSwitch = true;
                 break;
             }
@@ -69,4 +69,28 @@ function sortByPrice() {
     }
 }
 
-document.getElementById("sortButton").onclick = sortByPrice;
+function sortByPriceA() {
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("carTable");
+    switching = true;
+
+    while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("td")[3];
+            y = rows[i + 1].getElementsByTagName("td")[3];
+            if (x.innerHTML > y.innerHTML) {
+                shouldSwitch = true;
+                break;
+            }
+        }
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i], rows[i + 1]);
+            switching = true;
+        }
+    }
+}
+
+document.getElementById("sortButtonA").onclick = sortByPriceA;
