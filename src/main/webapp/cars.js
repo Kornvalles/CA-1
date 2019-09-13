@@ -53,11 +53,11 @@ function sortByPriceD() {
     while (switching) {
         switching = false;
         rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
+        for (i = 1; i < (rows.length); i++) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[3];
             y = rows[i + 1].getElementsByTagName("td")[3];
-            if (x.innerHTML < y.innerHTML) {
+            if (x.innerHTML > y.innerHTML) {
                 shouldSwitch = true;
                 break;
             }
@@ -77,11 +77,11 @@ function sortByPriceA() {
     while (switching) {
         switching = false;
         rows = table.rows;
-        for (i = 1; i < (rows.length - 1); i++) {
+        for (i = 1; i < (rows.length); i++) {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[3];
             y = rows[i + 1].getElementsByTagName("td")[3];
-            if (x.innerHTML > y.innerHTML) {
+            if (x.innerHTML < y.innerHTML) {
                 shouldSwitch = true;
                 break;
             }
