@@ -87,10 +87,11 @@ function sortByPriceA() {
             }
         }
         if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i], rows[i + 1]);
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
         }
     }
 }
 
+document.getElementById("sortButtonD").onclick = sortByPriceD;
 document.getElementById("sortButtonA").onclick = sortByPriceA;
