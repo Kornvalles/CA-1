@@ -3,8 +3,41 @@
         <title>Cars for sale</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #carTable {
+                /*background-image: url('/css/searchicon.png');*/
+                background-position: 10px 10px;
+                background-repeat: no-repeat;
+                width: 100%;
+                font-size: 16px;
+                padding: 12px 20px 12px 40px;
+                border: 1px solid #ddd;
+                margin-bottom: 12px;
+            }
+
+            #carTable {
+                border-collapse: collapse;
+                width: 100%;
+                border: 1px solid #ddd;
+                font-size: 18px;
+            }
+
+            #carTable th, #carTable td {
+                text-align: left;
+                padding: 12px;
+            }
+
+            #carTable tr {
+                border-bottom: 1px solid #ddd;
+            }
+
+            #carTable tr.header, #carTable tr:hover {
+                background-color: #f1f1f1;
+            }
+        </style>
     </head>
     <body>
+
         <div>
             <h2>Our Cars for sale</h2>
 
@@ -18,9 +51,7 @@
             </table>
             <button id="button">View All Cars</button> <input type="search" id="carMakeInput" onkeyup="filterCars()" placeholder="Filter Price">
 
-            <script src="cars.js">
-
-            </script>
+            <script src="cars.js"></script>
         </div>
     </body>
 </html>
