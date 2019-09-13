@@ -1,4 +1,3 @@
-
 function getJokes() {
     fetch("https://kodebanditterne.dk/CA-1/api/joke/all")
             .then(res => res.json())
