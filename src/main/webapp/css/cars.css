@@ -1,12 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Sep 13, 2019, 1:18:02 PM
-    Author     : ndupo
-*/
 @import url(https://fonts.googleapis.com/css?family=Mr+Dafoe);
 @import url(https://fonts.googleapis.com/css?family=Titillium+Web:900);
 @import url(https://fonts.googleapis.com/css?family=Righteous);
@@ -16,15 +7,141 @@ and open the template in the editor.
 
 @import url(https://fonts.googleapis.com/css?family=Monoton);
 
+
+body { background: #000; color: #fff; position: relative;}
+
 .chrome {
-  position: relative;
-  background-image: -webkit-linear-gradient(#378DBC 0%, #B6E8F1 46%, #ffffff 50%, #32120E 54%, #FFC488 58%, #582C11 90%, #EC9B4E 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 4px #f5f5f5;
-  font-size: 200px;
-  font-family: 'Titillium Web', sans-serif;
-  font-style: italic;
-  margin: 0;
-  line-height: 1;
+    left: 50px;
+    osition: relative;
+    background-image: -webkit-linear-gradient(#378DBC 0%, #B6E8F1 46%, #ffffff 50%, #32120E 54%, #FFC488 58%, #582C11 90%, #EC9B4E 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 4px #f5f5f5;
+    font-size: 150px;
+    font-family: 'Titillium Web', sans-serif;
+    font-style: italic;
+    margin: 0;
+    line-height: 1;
+}
+
+.chrome:before {
+    content: 'THE BEAGLE BOYS';
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+    background-image: -webkit-linear-gradient(-40deg, transparent 0%, transparent 40%, #fff 50%, transparent 60%, transparent 100%);
+    background-position:-680px 0;
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 0;
+    padding-right: 60px;
+    -webkit-animation-name: chrome_effect;
+    -webkit-animation-duration: 6s;
+    -webkit-animation-delay: 2s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+}
+
+.dreams {
+    position: absolute;
+    margin: 0px;
+    font-family: 'Mr Dafoe', cursive;
+    font-size: 160px;
+    color: #F975F7 ;
+    transform:rotate(-15deg);
+    -ms-transform:rotate(-15deg); /* IE 9 */
+    -webkit-transform:rotate(-15deg); /* Safari and Chrome */
+    margin-left: 1000px;
+    margin-top: -90px;
+    -webkit-text-stroke: 1px #f008b7;
+    -webkit-filter: drop-shadow(2px 2px 20px #f008b7);
+    z-index: 20;
+}
+
+.windows .dreams {
+    -webkit-text-stroke: 4px #f008b7;
+}
+
+@-webkit-keyframes chrome_effect {
+    0% {background-position:-800px 0;}
+    10% {background-position:600px 0;}
+    100% {background-position:600px 0;}
+}
+
+#carTable {
+    font-family: 'Spirax', cursive;
+    color: #ffffff;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 1200px;
+    font-size: 34px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
+    background-color: #000000;
+    opacity: 0.9;
+}
+
+#carTable {
+    border-collapse: collapse;
+    width: 1200px;
+    border: 1px solid #ddd;
+    font-size: 34px;
+}
+
+#carTable th, #carTable td {
+    text-align: left;
+    padding: 12px;
+}
+
+#carTable tr {
+    border-bottom: 1px solid #ddd;
+}
+
+#carTable tr.header, #carTable tr:hover {
+    background-color: #676767;
+}
+
+.black {
+    color: #000000;
+    font-size: 20px;
+}
+
+
+.button {
+    background-color: #4CAF50; 
+    border: none;
+    color: black;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 34px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    font-family: 'Spirax', cursive;
+    background-color: black;
+    color: white;
+    border: 2px solid #555555;
+    width: 398px;
+    font-size: 34px;
+}
+
+.button1:hover {
+    background-color: #555555;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.Text1 {
+    font-family: 'Spirax', cursive;
+    font-size: 34px;
+    top: 50px;
+    width: 250px;
+    height: 50px;
 }

@@ -95,3 +95,9 @@ function sortByPriceA() {
 
 document.getElementById("sortButtonD").onclick = sortByPriceD;
 document.getElementById("sortButtonA").onclick = sortByPriceA;
+
+if ( navigator.platform.indexOf('Win') != -1 ) {
+  window.document.getElementById("wrapper").setAttribute("class", "windows");
+} else if ( navigator.platform.indexOf('Mac') != -1 ) {
+  window.document.getElementById("wrapper").setAttribute("class", "mac");
+}

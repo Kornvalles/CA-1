@@ -3,57 +3,35 @@
         <title>Cars for sale</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-            #carTable {
-                /*background-image: url('/css/searchicon.png');*/
-                background-position: 10px 10px;
-                background-repeat: no-repeat;
-                width: 100%;
-                font-size: 16px;
-                padding: 12px 20px 12px 40px;
-                border: 1px solid #ddd;
-                margin-bottom: 12px;
-            }
-
-            #carTable {
-                border-collapse: collapse;
-                width: 100%;
-                border: 1px solid #ddd;
-                font-size: 18px;
-            }
-
-            #carTable th, #carTable td {
-                text-align: left;
-                padding: 12px;
-            }
-
-            #carTable tr {
-                border-bottom: 1px solid #ddd;
-            }
-
-            #carTable tr.header, #carTable tr:hover {
-                background-color: #f1f1f1;
-            }
-        </style>
+        <link href="css/cars.css" rel="stylesheet">
     </head>
     <body>
 
-        <div>
-            <h2>Our Cars for sale</h2>
+        <div id="wrapper">
+            <h1 class="chrome">THE BEAGLE BOYS</h1>
+            <h3 class="dreams">Carshop</h3> 
+            
+            
+            <h1 class="black">.</h1> <br>
+            <h1 class="black">.</h1>
+            <input class="text1" type="search" id="carMakeInput" onkeyup="filterCars()" placeholder="..." style="margin-left: 245px;">
+            <div align="center">
+                
+                <table class="table" id="carTable">
+                    <thead>
+                        <tr><th>Year</th><th>Make</th><th>Model</th><th>Price</th></tr>
+                    </thead>
+                    <tbody id="tbody">
 
-            <table class="table" id="carTable">
-                <thead>
-                    <tr><th>Year</th><th>Make</th><th>Model</th><th>Price</th></tr>
-                </thead>
-                <tbody id="tbody">
-
-                </tbody>
-            </table>
-            <button id="button">View All Cars</button> <input type="search" id="carMakeInput" onkeyup="filterCars()" placeholder="Filter Price">
-            <button id="sortButtonA">Sort by price ascending</button>
-            <button id="sortButtonD">Sort by price descending</button>
-            <script src="cars.js">
-            </script>
-        </div>
+                    </tbody>
+                </table>
+                <div class="buttons">
+                    <button class="button1" id="button">View All Cars</button>
+                    <button class="button1" id="sortButtonA">Price ascending</button>
+                    <button class="button1" id="sortButtonD">Price descending</button>
+                </div>
+                <script src="cars.js">
+                </script>
+            </div>
     </body>
 </html>
