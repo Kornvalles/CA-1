@@ -30,4 +30,4 @@ function getRandomJoke() {
                 document.getElementById("tbody2").innerHTML = rowsAsString;
             })
 }
-document.getElementById("button2").onclick = getRandomJokes;
+document.getElementById("button2").onclick = getRandomJoke;
