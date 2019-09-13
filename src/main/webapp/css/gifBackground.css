@@ -7,15 +7,6 @@ and open the template in the editor.
     Created on : Sep 11, 2019, 12:52:11 PM
     Author     : ndupo
 */
-<<<<<<< HEAD
-html { 
-  background: url(https://www.awaltzthroughdisney.com/uploads/6/2/7/6/6276678/mickey-mouse-short-touchdown-and-out-6_orig.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 100%;
-=======
 html {
     background: url(https://www.awaltzthroughdisney.com/uploads/6/2/7/6/6276678/mickey-mouse-short-touchdown-and-out-6_orig.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
@@ -23,7 +14,6 @@ html {
     -o-background-size: cover;
     background-size: cover;
     height: 100%;
->>>>>>> Nicklas
 }
 body {
     height: 100%;
