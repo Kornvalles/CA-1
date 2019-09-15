@@ -15,18 +15,18 @@ function getJokes() {
 }
 document.getElementById("button").onclick = getJokes;
 
-function getRandomJoke() {
-    fetch("https://kodebanditterne.dk/CA-1/api/joke/random")
-            .then(res => res.json())
-            .then(data => {
-
-                let rows = data.map(function (name) {
-                    let row = "<tr> <td>" + name.joke + "</td> <td>" + name.reference +
-                            "</td> <td>" + name.rating + "</td> </tr>";
-                    return row;
-                })
-                let rowsAsString = rows.join("");
-                document.getElementById("tbody2").innerHTML = rowsAsString;
-            })
-}
-document.getElementById("button2").onclick = getRandomJoke;
+//function getRandomJoke() {
+//    fetch("https://kodebanditterne.dk/CA-1/api/joke/random")
+//            .then(res => res.json())
+//            .then(data => {
+//
+//                let rows = data.map(function (name) {
+//                    let row = "<tr> <td>" + name.joke + "</td> <td>" + name.reference +
+//                            "</td> <td>" + name.rating + "</td> </tr>";
+//                    return row;
+//                })
+//                let rowsAsString = rows.join("");
+//                document.getElementById("tbody2").innerHTML = rowsAsString;
+//            })
+//}
+//document.getElementById("button2").onclick = getRandomJoke;
