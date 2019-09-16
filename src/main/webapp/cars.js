@@ -1,10 +1,4 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /* global fetch */
-
 function getCars() {
     fetch("https://kodebanditterne.dk/CA-1/api/car/all")
             .then(res => res.json())
@@ -57,7 +51,7 @@ function sortByPriceD() {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[3];
             y = rows[i + 1].getElementsByTagName("td")[3];
-            if (Number(x.innerHTML) > Number(y.innerHTML)) {
+            if (Number(x.innerHTML) < Number(y.innerHTML)) {
                 shouldSwitch = true;
                 break;
             }
@@ -81,7 +75,7 @@ function sortByPriceA() {
             shouldSwitch = false;
             x = rows[i].getElementsByTagName("td")[3];
             y = rows[i + 1].getElementsByTagName("td")[3];
-            if (Number(x.innerHTML) < Number(y.innerHTML)) {
+            if (Number(x.innerHTML) > Number(y.innerHTML)) {
                 shouldSwitch = true;
                 break;
             }
@@ -96,8 +90,8 @@ function sortByPriceA() {
 document.getElementById("sortButtonD").onclick = sortByPriceD;
 document.getElementById("sortButtonA").onclick = sortByPriceA;
 
-if ( navigator.platform.indexOf('Win') != -1 ) {
+if ( navigator.platform.indexOf('Win') !== -1 ) {
   window.document.getElementById("wrapper").setAttribute("class", "windows");
-} else if ( navigator.platform.indexOf('Mac') != -1 ) {
+} else if ( navigator.platform.indexOf('Mac') !== -1 ) {
   window.document.getElementById("wrapper").setAttribute("class", "mac");
 }
