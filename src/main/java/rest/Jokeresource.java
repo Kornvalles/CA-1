@@ -66,13 +66,4 @@ public class Jokeresource {
         }
         return GSON.toJson(jdto);
     }
-
-    @Path("populate")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String populate() {
-        FACADE.populateJokes();
-        return "{\"msg\":\"done!\"}";
-    }
-
 }

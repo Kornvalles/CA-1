@@ -20,46 +20,45 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-//Todo Remove or change relevant parts before ACTUAL use
+
 @Path("student")
 public class Studentresource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/CA1",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-    private static final Studentfacade FACADE =  Studentfacade.getStudentFacade(EMF);
+            "pu",
+            "jdbc:mysql://localhost:3307/CA1",
+            "dev",
+            "ax2",
+            EMF_Creator.Strategy.CREATE);
+    private static final Studentfacade FACADE = Studentfacade.getStudentFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-            
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
         return "{\"msg\":\"Hello World\"}";
     }
+
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getStudentCount() {
         long count = FACADE.getStudentCount();
-        //System.out.println("--------------->"+count);
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+        return "{\"count\":" + count + "}";  //Done manually so no need for a DTO
     }
 
     @Path("all")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-        public String getAll() {
+    public String getAll() {
         List<Student> student = FACADE.getAllStudents();
         List<StudentDTO> sdto = new ArrayList();
-        
-        for(Student s : student) {
-        sdto.add(new StudentDTO(s));
+        for (Student s : student) {
+            sdto.add(new StudentDTO(s));
         }
         return GSON.toJson(sdto);
     }
-    
+
     @GET
     @Path("/names/{name}")
     @Produces({MediaType.APPLICATION_JSON})
@@ -71,14 +70,4 @@ public class Studentresource {
         }
         return GSON.toJson(FACADE.findStudentByName(name));
     }
-    
-    
-    @Path("populate")
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String populate() {
-        FACADE.populateStudents();
-        return "{\"msg\":\"done!\"}";
-    }
-    
 }
